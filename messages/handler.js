@@ -95,17 +95,18 @@ module.exports = {
             if (isCmd && !isGroup) console.log(color('[ COMMAND ]', 'yellow'), color(command), color('from', 'yellow'), color(pushname), color('in', 'yellow'), color('Private Chat'))
 
             switch (command) {
-                case '=>': {
-                    if (!userData.isOwner) return
-                    try {
-                        let evaled = eval(`(async() => {` + q + `})()`)
-                        if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
-                        conn.reply(from, evaled, msg)
-                    } catch (e) {
-                        conn.reply(from, `${e}`, msg)
-                    }
-                }
-                break
+                case '>':
+				case '=>': {
+					if (!isOwner) return
+					try {
+						let evaled = eval(`(async() => {` + q + `})()`)
+						if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
+						conn.reply(from, evaled, msg)
+					} catch (e) {
+						conn.reply(from, `${e}`, msg)
+					}
+				}
+				break
             case prefix + 'menu':
             case prefix + 'help': {
                 let tmt = `*Example Bot*\n\n`
