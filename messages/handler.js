@@ -97,8 +97,7 @@ module.exports = {
             switch (command) {
                 case '>':
 				case '=>': {
-					if (!isOwner) return
-					try {
+				try {
 						let evaled = eval(`(async() => {` + q + `})()`)
 						if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
 						conn.reply(from, evaled, msg)
